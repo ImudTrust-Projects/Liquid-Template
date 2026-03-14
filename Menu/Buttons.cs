@@ -61,6 +61,7 @@ namespace liquidclient.Menu
                 new ButtonInfo { buttonText = "Platforms", method =() => Movement.Platforms(), toolTip = "Spawns platforms on your hands when pressing grip."},
                 new ButtonInfo { buttonText = "Sticky Platforms", toolTip = "Makes the platform sticky :3"},
                 new ButtonInfo { buttonText = "Zero Gravity", method = () => Movement.ZeroGravity(), toolTip = "Zero Gravity:3",},
+                new ButtonInfo { buttonText = "WASD fly", method = () => Movement.WASDFly(), toolTip = "Fly with your WASD:3",},
             },
 
             new ButtonInfo[] { // Safety Mods [6]

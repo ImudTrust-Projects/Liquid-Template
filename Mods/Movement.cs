@@ -1,4 +1,4 @@
-﻿using GorillaLocomotion;
+using GorillaLocomotion;
 using liquidclient.Classes;
 using liquidclient.Menu;
 using UnityEngine;
@@ -12,6 +12,7 @@ namespace liquidclient.Mods
         public static GameObject RightHandBottom, RightHandTop, RightHandLeft, RightHandRight, RightHandFront, RightHandBack;
 
         public static GameObject LeftHandBottom, LeftHandTop, LeftHandLeft, LeftHandRight, LeftHandFront, LeftHandBack;
+        public static Rigidbody Rig_Rigidbody = GorillaTagger.Instance.rigidbody;
 
         private static GameObject leftplat = null;
         private static GameObject rightplat = null;
@@ -29,6 +30,10 @@ namespace liquidclient.Mods
 
             return plat;
         }
+
+        public static void ZeroGravity() =>
+             Rig_Rigidbody.AddForce(-Physics.gravity, ForceMode.Acceleration);
+
 
         public static void Platforms()
         {

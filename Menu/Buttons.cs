@@ -1,4 +1,4 @@
-﻿using GorillaLocomotion;
+using GorillaLocomotion;
 using GorillaNetworking;
 using Oculus.Interaction;
 using Photon.Pun;
@@ -60,6 +60,7 @@ namespace liquidclient.Menu
             new ButtonInfo[] { // Movement Mods [5]
                 new ButtonInfo { buttonText = "Platforms", method =() => Movement.Platforms(), toolTip = "Spawns platforms on your hands when pressing grip."},
                 new ButtonInfo { buttonText = "Sticky Platforms", toolTip = "Makes the platform sticky :3"},
+                new ButtonInfo { buttonText = "Zero Gravity", method = () => Movement.ZeroGravity(), toolTip = "Zero Gravity:3",},
             },
 
             new ButtonInfo[] { // Safety Mods [6]

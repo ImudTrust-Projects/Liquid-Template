@@ -1,7 +1,7 @@
 # Liquid Template
 
 Liquid Template is a mod menu template for Gorilla Tag that provides custom categories and a wide range of customization options. This template is designed for users who already have some experience with creating mod menus. If you are new to menu development, it may be more challenging to work with.
-
+# FOLLOW MY YT CHANNEL TO KNOW HOW TO SET IT UP [Video on how to set up](https://youtu.be/t3d6QeQO_wE)
 ## Permission
 
 No permission is required to use this template. It is free and publicly available for anyone. You are allowed to use it in your own projects, modify it to suit your needs, and share it with others. The goal is to support an open and collaborative community where resources are accessible to everyone.

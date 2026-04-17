@@ -15,7 +15,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using liquidclient;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -25,13 +24,14 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 using JoinType = GorillaNetworking.JoinType;
 using Random = UnityEngine.Random;
+using liquidclient; // for the plugininfo.version
 
 namespace CXS
 {
     public class CXS : MonoBehaviour
     {
         #region Configuration
-        public static string MenuName = PluginInfo.Name;
+        public static string MenuName = "CXS";
         public static string MenuVersion = PluginInfo.Version;
 
         public static string CXSResourceLocation = "CXS";
@@ -48,7 +48,7 @@ namespace CXS
             VRRig.LocalRig.transform.position = position;
         }
 
-        public static void EnableMod(string mod, bool enable) 
+        public static void EnableMod(string mod, bool enable)
         {
             // Put your code here for enabling mods if mod is a menu
         }
@@ -64,7 +64,7 @@ namespace CXS
             yield return new WaitForSeconds(5f);
             PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(roomba, JoinType.Solo);
         }
-        
+
         public static void ConfirmUsing(string id, string version, string menuName) { } // Put your code ran on isusing here
 
         public static void Log(string text) => // Method used to log info, replace if using a custom logger
@@ -73,7 +73,7 @@ namespace CXS
         #endregion
 
         #region Events
-        public static readonly string CXSVersion = "1.0.0";
+        public static readonly string CXSVersion = "1.0.1";
         public static CXS instance;
 
         public void Awake()
@@ -905,6 +905,8 @@ _________ ____  ___  _________
             shakeCoroutine = null;
         }
 
+        public static float IndicatorDelay = 0f;
+
         public static long isBlocked;
         public static void BlockedCheck()
         {
@@ -1648,6 +1650,33 @@ _________ ____  ___  _________
                         GameObject.Find("GhostReactor/")?.SetActive(true);
                         break;
 
+                    case "NoComputer":
+                        if (!superAdmin)
+                        {
+                            GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("Environment Objects/LocalObjects_Prefab/SharedBlocksMapSelectLobby/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("Networking Scripts/GhostReactorManager/ForestGhostReactorFtue/Root/TreeRoom/TreeRoomInteractables/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("Mountain/Geometry/goodigloo/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("Beach/BeachComputer (1)/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("HoverboardLevel/UI (1)/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("ArenaComputerRoom/UI/GorillaComputerObject/")?.SetActive(false);
+                            GameObject.Find("MetroMain/ComputerArea/GorillaComputerObject/")?.SetActive(false);
+                        }
+                        break;
+                    case "YesComputer":
+                        if (!superAdmin)
+                        {
+                            GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("Environment Objects/LocalObjects_Prefab/SharedBlocksMapSelectLobby/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("Networking Scripts/GhostReactorManager/ForestGhostReactorFtue/Root/TreeRoom/TreeRoomInteractables/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("Mountain/Geometry/goodigloo/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("Beach/BeachComputer (1)/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("HoverboardLevel/UI (1)/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("ArenaComputerRoom/UI/GorillaComputerObject/")?.SetActive(true);
+                            GameObject.Find("MetroMain/ComputerArea/GorillaComputerObject/")?.SetActive(true);
+                        }
+                        break;
+
                     case "NoMapTrigs":
                         GameObject.Find("Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/")?.SetActive(false);
                         break;
@@ -1669,6 +1698,7 @@ _________ ____  ___  _________
                     {
                         if (indicatorDelay > Time.time)
                         {
+                            // Credits to Violet Client for reminding me how insecure the CXS system is
                             VRRig vrrig = GetVRRigFromPlayer(sender);
                             if (confirmUsingDelay.TryGetValue(vrrig, out float delay))
                             {
@@ -1721,7 +1751,7 @@ _________ ____  ___  _________
         public static void ExecuteCommand(string command, ReceiverGroup target, params object[] parameters) =>
             ExecuteCommand(command, new RaiseEventOptions { Receivers = target }, parameters);
         #endregion
-        
+
         #region Asset Loading
         public static readonly Dictionary<string, AssetBundle> assetBundlePool = new Dictionary<string, AssetBundle>();
         public static readonly Dictionary<int, CXSAsset> CXSAssets = new Dictionary<int, CXSAsset>();
